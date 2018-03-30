@@ -6,6 +6,7 @@ package com.kilo.spark.kafka;
  */
 public class KafkaProperties {
     public static final String ZK = "sparksql:2181";
-    public static final String TOPIC = "hello";
+    public static final String TOPIC = "test";
     public static final String BROKER_LIST = "sparksql:9092";
+    public static final String GROUP_ID = "test_group1";
 }

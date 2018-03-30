@@ -27,9 +27,9 @@ public class KafkaProducer extends Thread {
 
     }
 
+
     @Override
     public void run() {
-//        super.run();
         int messageNo = 1;
         while (true) {
             String message = "message_" + messageNo;
@@ -40,7 +40,7 @@ public class KafkaProducer extends Thread {
 
             try {
                 Thread.sleep(2000);
-            } catch (InterruptedException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
