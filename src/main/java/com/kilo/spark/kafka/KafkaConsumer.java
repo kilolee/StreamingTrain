@@ -36,7 +36,7 @@ public class KafkaConsumer extends Thread {
         ConsumerConnector consumer = createConnector();
 
         Map<String, Integer> topicCountMap = new HashMap<String, Integer>();
-        //"1"说明从一个kafkastream中取数据
+        //"1"说明list中只有一个成员
         topicCountMap.put(topic, 1);
 
         //String：topic
