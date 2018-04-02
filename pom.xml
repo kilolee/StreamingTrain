@@ -8,7 +8,18 @@
     <properties>
         <scala.version>2.11.8</scala.version>
         <kafka.version>0.9.0.0</kafka.version>
+        <spark.version>2.2.0</spark.version>
+        <hadoop.version>2.6.0-cdh5.7.0</hadoop.version>
+        <hbase.version>1.2.0-cdh5.7.0</hbase.version>
     </properties>
+
+    <repositories>
+        <!--添加cloudera的repository-->
+        <repository>
+            <id>cloudera</id>
+            <url>https://repository.cloudera.com/artifactory/cloudera-repos</url>
+        </repository>
+    </repositories>
 
     <!--<repositories>-->
     <!--<repository>-->
@@ -40,6 +51,44 @@
             <version>${kafka.version}</version>
         </dependency>
 
+        <!--Hadoop的依赖-->
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-client</artifactId>
+            <version>${hadoop.version}</version>
+        </dependency>
+
+        <!--HBase的依赖-->
+        <dependency>
+            <groupId>org.apache.hbase</groupId>
+            <artifactId>hbase-client</artifactId>
+            <version>${hbase.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.hbase</groupId>
+            <artifactId>hbase-server</artifactId>
+            <version>${hbase.version}</version>
+        </dependency>
+
+        <!--Spark Streaming的依赖-->
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-streaming_2.11</artifactId>
+            <version>${spark.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.module</groupId>
+            <artifactId>jackson-module-scala_2.11</artifactId>
+            <version>2.6.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.jpountz.lz4</groupId>
+            <artifactId>lz4</artifactId>
+            <version>1.3.0</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -64,23 +113,23 @@
                     </args>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-eclipse-plugin</artifactId>
-                <configuration>
-                    <downloadSources>true</downloadSources>
-                    <buildcommands>
-                        <buildcommand>ch.epfl.lamp.sdt.core.scalabuilder</buildcommand>
-                    </buildcommands>
-                    <additionalProjectnatures>
-                        <projectnature>ch.epfl.lamp.sdt.core.scalanature</projectnature>
-                    </additionalProjectnatures>
-                    <classpathContainers>
-                        <classpathContainer>org.eclipse.jdt.launching.JRE_CONTAINER</classpathContainer>
-                        <classpathContainer>ch.epfl.lamp.sdt.launching.SCALA_CONTAINER</classpathContainer>
-                    </classpathContainers>
-                </configuration>
-            </plugin>
+            <!--<plugin>-->
+            <!--<groupId>org.apache.maven.plugins</groupId>-->
+            <!--<artifactId>maven-eclipse-plugin</artifactId>-->
+            <!--<configuration>-->
+            <!--<downloadSources>true</downloadSources>-->
+            <!--<buildcommands>-->
+            <!--<buildcommand>ch.epfl.lamp.sdt.core.scalabuilder</buildcommand>-->
+            <!--</buildcommands>-->
+            <!--<additionalProjectnatures>-->
+            <!--<projectnature>ch.epfl.lamp.sdt.core.scalanature</projectnature>-->
+            <!--</additionalProjectnatures>-->
+            <!--<classpathContainers>-->
+            <!--<classpathContainer>org.eclipse.jdt.launching.JRE_CONTAINER</classpathContainer>-->
+            <!--<classpathContainer>ch.epfl.lamp.sdt.launching.SCALA_CONTAINER</classpathContainer>-->
+            <!--</classpathContainers>-->
+            <!--</configuration>-->
+            <!--</plugin>-->
         </plugins>
     </build>
     <reporting>
