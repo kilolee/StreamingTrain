@@ -1,4 +1,4 @@
-package com.kilo.spark
+package com.kilo.spark.sources.basic
 
 import java.sql.DriverManager
 

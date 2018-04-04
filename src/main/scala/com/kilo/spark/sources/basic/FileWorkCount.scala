@@ -1,4 +1,4 @@
-package com.kilo.spark
+package com.kilo.spark.sources.basic
 
 import org.apache.spark.SparkConf
 import org.apache.spark.streaming.{Seconds, StreamingContext}

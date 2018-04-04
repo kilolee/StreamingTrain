@@ -1,4 +1,4 @@
-package com.kilo.spark
+package com.kilo.spark.sources.advanced.flume
 
 import org.apache.spark.SparkConf
 import org.apache.spark.streaming.flume.FlumeUtils
