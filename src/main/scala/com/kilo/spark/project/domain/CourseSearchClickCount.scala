@@ -7,4 +7,4 @@ package com.kilo.spark.project.domain
   * @param click_count
   * Created by kilo on 2018/4/10.
   */
-class CourseSearchClickCount(day_search_course: String, click_count: Long)
+case class CourseSearchClickCount(day_search_course: String, click_count: Long)

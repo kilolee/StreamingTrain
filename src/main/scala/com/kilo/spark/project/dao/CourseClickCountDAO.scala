@@ -16,7 +16,7 @@ object CourseClickCountDAO {
 
   val tableName = "imooc_course_clickcount"
   val cf = "info"
-  val qualifer = "click_count"
+  val qualifier = "click_count"
 
   /**
     * 保存数据到HBase
@@ -27,7 +27,7 @@ object CourseClickCountDAO {
     val table = HBaseUtils.getInstance().getTable(tableName)
 
     for (ele <- list) {
-      table.incrementColumnValue(ele.day_course.getBytes, cf.getBytes, qualifer.getBytes, ele.click_count)
+      table.incrementColumnValue(ele.day_course.getBytes, cf.getBytes, qualifier.getBytes, ele.click_count)
     }
   }
 
@@ -42,7 +42,7 @@ object CourseClickCountDAO {
 
     val get = new Get(day_course.getBytes())
 
-    val value = table.get(get).getValue(cf.getBytes(), qualifer.getBytes())
+    val value = table.get(get).getValue(cf.getBytes(), qualifier.getBytes())
     if (value == null) {
       0l
     } else {
@@ -57,7 +57,7 @@ object CourseClickCountDAO {
     list.append(CourseClickCount("20171111_9", 9))
     list.append(CourseClickCount("20171111_1", 100))
 
-    save(list)
+//    save(list)
 
     println(count("20171111_8") + " : " + count("20171111_9") + " : " + count("20171111_1"))
   }
