@@ -1,0 +1,31 @@
+采用push方式，先启动SparkStreaming，再启动flume
+
+./spark-submit \
+--class com.kilo.spark.sources.advanced.flume.FlumePushWordCount \
+--name FlumePushWordCount \
+--master local[2] \
+--packages org.apache.spark:spark-streaming-flume_2.11:2.2.0 \
+/root/lib/streamingtrain-1.0.jar \
+sparksql 41414
+
+./flume-ng agent --name a1 --conf /root/conf --conf-file /root/conf/flume-push-streaming.conf -Dflume.root.logger=INFO,console
+
+
+
+采用pull方式，先启动flume，再启动SparkStreaming
+
+./flume-ng agent --name a1 --conf /root/conf --conf-file /root/conf/flume-pull-streaming.conf -Dflume.root.logger=INFO,console
+
+./spark-submit \
+--class com.kilo.spark.sources.advanced.flume.FlumePullWordCount \
+--name FlumePullWordCount \
+--master local[2] \
+--packages org.apache.spark:spark-streaming-flume_2.11:2.2.0 \
+/root/lib/streamingtrain-1.0.jar \
+sparksql 41414
+
+
+
+
+
+

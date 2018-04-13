@@ -1,0 +1,26 @@
+启动zookeeper
+zkServer.sh start
+
+启动kafka
+kafka-server-start.sh -daemon /root/app/kafka_2.11-0.9.0.0/config/server.properties
+
+创建topic：zk
+kafka-topics.sh --create --zookeeper sparksql:2181 --replication-factor 1 --partitions 1 --topic kafka_sreaming_topic
+
+查看所有topic
+kafka-topics.sh --list --zookeeper sparksql:2181
+
+发送消息：broker
+kafka-console-producer.sh --broker-list sparksql:9092 --topic kafka_sreaming_topic
+
+消费消息：zk
+kafka-console-consumer.sh --zookeeper sparksql:2181 --topic kafka_sreaming_topic
+
+启动Spark Streaming作业
+./spark-submit \
+--class com.kilo.spark.sources.advanced.kafka.KafkaReceiverWordCount \
+--name KafkaReceiverWordCount \
+--master local[2] \
+--packages org.apache.spark:spark-streaming-kafka-0-8_2.11:2.2.0 \
+/root/lib/streamingtrain-1.0.jar \
+sparksql:2181 kafka kafka_streaming_topic 1

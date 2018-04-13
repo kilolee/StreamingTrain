@@ -1,0 +1,29 @@
+测试
+flume-ng agent --name agent --conf /root/conf --conf-file /root/conf/streaming_project.conf -Dflume.root.logger=INFO,console
+
+
+启动HDFS
+start-all.sh
+
+启动zookeeper
+zkServer.sh start
+
+启动kafka
+kafka-server-start.sh -daemon /root/app/kafka_2.11-0.9.0.0/config/server.properties
+
+消费消息：zk
+kafka-console-consumer.sh --zookeeper sparksql:2181 --topic test
+
+启动flume
+flume-ng agent --name agent --conf /root/conf --conf-file /root/conf/streaming_project2.conf -Dflume.root.logger=INFO,console
+
+
+启动Spark 应用
+./spark-submit \
+--master local[5] \
+--class com.kilo.spark.project.spark.StatStreamingApp \
+--name StatStreamingApp \
+--packages org.apache.spark:spark-streaming-kafka-0-8_2.11:2.2.0 \
+--jars $(echo /root/app/hbase-1.2.0-cdh5.7.0/lib/*.jar | tr ' ' ',') \
+/root/lib/streamingtrain-1.0.jar \
+sparksql:2181 kafka streaming_topic 1

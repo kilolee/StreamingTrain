@@ -1,0 +1,24 @@
+测试
+flume-ng agent \
+--name agent1 \
+--conf /root/conf \
+--conf-file /root/conf/streaming.conf \
+-Dflume.root.logger=INFO,console
+
+
+启动zookeeper
+zkServer.sh start
+
+kafka-server-start.sh -daemon /root/app/kafka_2.11-0.9.0.0/config/server.properties
+
+kafka-topics.sh --create --zookeeper sparksql:2181 --replication-factor 1 --partitions 1 --topic streaming_topic
+
+kafka-topics.sh --list --zookeeper sparksql:2181
+
+kafka-console-consumer.sh --zookeeper sparksql:2181 --topic sreaming_topic
+
+flume-ng agent \
+--name agent1 \
+--conf /root/conf \
+--conf-file /root/conf/streaming2.conf \
+-Dflume.root.logger=INFO,console

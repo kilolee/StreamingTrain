@@ -1,0 +1,15 @@
+exec => memory => avro sink => memory => kafka
+
+启动flume
+./flume-ng agent --name a1 --conf /root/conf --conf-file /root/conf/exec-memory-avro.conf -Dflume.root.logger=INFO,console
+./flume-ng agent --name a2 --conf /root/conf --conf-file /root/conf/avro-memory-kafka.conf -Dflume.root.logger=INFO,console
+
+
+启动zookeeper
+zookeeper-server-start.sh -daemon /root/app/kafka_2.11-0.9.0.0/config/zookeeper.properties
+
+启动kafka
+kafka-server-start.sh -daemon /root/app/kafka_2.11-0.9.0.0/config/server.properties
+
+消费消息：zk
+kafka-console-consumer.sh --zookeeper sparksql:2181 --topic test
